@@ -11,6 +11,9 @@ const validator = require("../middlewares/validatorMiddleware");
 
 const productRouter = express.Router();
 
+//re routing cart route
+productRouter.use("/get/:productID", require("./cartRouter"));
+
 productRouter
   .route("/add-product")
   .post(auth, upload.array("images"), addProduct);
