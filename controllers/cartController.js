@@ -16,21 +16,27 @@ const addToCart = asyncHandler(async (req, res) => {
   }
 
   //users cart
-  const cartExists = await Cart.find({ user: req.user.id });
+  const cartExists = await Cart.findOne({ user: req.user.id }).populate({
+    path: "products",
+    populate: "product",
+  });
 
   let cart;
 
-  if (cartExists.length > 0) {
+  if (cartExists) {
+    let totalPrice = cartExists.cartValue + product.price;
     cart = await Cart.findOneAndUpdate(
       { user: req.user.id },
       {
         $push: { products: { product: product._id } },
+        $set: { cartValue: totalPrice },
       }
     );
   } else {
     cart = await Cart.create({
       user: req.user.id,
       products: [{ product: product._id }],
+      cartValue: product.price,
     });
   }
 
@@ -73,15 +79,18 @@ const deleteSingleCartProduct = asyncHandler(async (req, res) => {
     throw new Error("Product not found");
   }
 
-  const carts = await Cart.find({ user: req.user.id });
+  const carts = await Cart.findOne({ user: req.user.id }).populate({
+    path: "products",
+    populate: "product",
+  });
 
-  if (carts.length === 0) {
-    res.status(200).json("No cart items available");
-  }
-
+  let totalPrice = carts.cartValue - product.price;
   const deleteCartItem = await Cart.findOneAndUpdate(
     { user: req.user.id },
-    { $pull: { products: { product: product._id } } }
+    {
+      $pull: { products: { product: product._id } },
+      $set: { cartValue: totalPrice },
+    }
   );
 
   if (!deleteCartItem) {

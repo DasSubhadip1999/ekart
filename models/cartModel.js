@@ -18,6 +18,10 @@ const cartSchema = mongoose.Schema({
       },
     },
   ],
+  cartValue: {
+    type: Number,
+    require: true,
+  },
 });
 
 module.exports = mongoose.model("Cart", cartSchema);
