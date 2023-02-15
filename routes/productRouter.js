@@ -1,5 +1,6 @@
 const express = require("express");
 const { body } = require("express-validator");
+const { getCartProducts } = require("../controllers/cartController");
 const {
   addProduct,
   getAllProducts,
@@ -20,5 +21,6 @@ productRouter
 
 productRouter.route("/get").get(getAllProducts);
 productRouter.route("/get/:productID").get(getSingleProduct);
+productRouter.route("/cart-products").get(auth, getCartProducts);
 
 module.exports = productRouter;
