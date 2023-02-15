@@ -33,9 +33,10 @@ const register = asyncHandler(async (req, res) => {
 const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await User.find({ email });
+  const user = await User.findOne({ email });
 
   if (!user) {
+    res.status(400);
     throw new Error("No user found");
   }
 

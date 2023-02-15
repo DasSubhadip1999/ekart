@@ -7,16 +7,23 @@ const auth = asyncHandler(async (req, res, next) => {
   const header = req.headers.authorization;
   if (header && header.startsWith("Bearer")) {
     try {
-      token = header.split(" ")[0];
+      token = header.split(" ")[1];
 
       const decode = jwt.verify(token, process.env.JWT_SECRET);
 
       req.user = await User.findById(decode.id).select("-password");
 
+      if (req.url === "/add-product") {
+        if (!req.user.isAdmin) {
+          res.status(401);
+          throw new Error("Only admins can add product");
+        }
+      }
+
       next();
     } catch (error) {
       res.status(401);
-      throw new Error("Not authorized");
+      throw new Error(error);
     }
   } else {
     if (!token) {
