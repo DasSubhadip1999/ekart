@@ -8,6 +8,8 @@ const validator = (req, res, next) => {
     res.status(400);
     throw new Error(message);
   }
+
+  next();
 };
 
 module.exports = validator;
