@@ -11,6 +11,7 @@ connectDB();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/users", require("./routes/userRouter"));
+app.use("/products", require("./routes/productRouter"));
 app.use(errorHandler);
 
 app.get("/", (req, res) => {
