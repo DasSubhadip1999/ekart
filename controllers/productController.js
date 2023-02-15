@@ -38,7 +38,21 @@ const getAllProducts = asynchandler(async (req, res) => {
   res.status(200).json(products);
 });
 
+const getSingleProduct = asynchandler(async (req, res) => {
+  const { productID } = req.params;
+
+  const product = await Product.findOne({ _id: productID });
+
+  if (!product) {
+    res.status(404);
+    throw new Error("Product not found");
+  }
+
+  res.status(200).json(product);
+});
+
 module.exports = {
   addProduct,
   getAllProducts,
+  getSingleProduct,
 };

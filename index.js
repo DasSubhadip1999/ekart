@@ -10,6 +10,7 @@ connectDB();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use("/uploads", express.static("uploads"));
 app.use("/users", require("./routes/userRouter"));
 app.use("/products", require("./routes/productRouter"));
 app.use(errorHandler);
@@ -18,6 +19,8 @@ app.get("/", (req, res) => {
   res.status(200).json({ message: "Welcome to Ekart" });
 });
 
-app.listen(PORT, () =>
-  console.log(`Server started on port ${PORT}`.yellow.underline)
-);
+app.listen(PORT, () => {
+  if (process.env.NODE_ENV !== "production") {
+    console.log(`Server started on port ${PORT}`.yellow.underline);
+  }
+});
