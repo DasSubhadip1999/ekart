@@ -57,4 +57,5 @@ const genToken = (id) => {
 
 module.exports = {
   register,
+  login,
 };

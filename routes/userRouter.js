@@ -1,6 +1,6 @@
 const express = require("express");
 const { body } = require("express-validator");
-const { register } = require("../controllers/userController");
+const { register, login } = require("../controllers/userController");
 const validator = require("../middlewares/validatorMiddleware");
 
 const userRouter = express.Router();
@@ -15,6 +15,17 @@ userRouter
       .withMessage("Password should have minimum length of six"),
     validator,
     register
+  );
+
+userRouter
+  .route("/login")
+  .post(
+    body("email").isEmail().withMessage("Please enter an email"),
+    body("password")
+      .isLength({ min: 6 })
+      .withMessage("Password should have minimum length of six"),
+    validator,
+    login
   );
 
 module.exports = userRouter;
