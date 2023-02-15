@@ -27,6 +27,18 @@ const addProduct = asynchandler(async (req, res) => {
   res.status(201).json(product);
 });
 
+const getAllProducts = asynchandler(async (req, res) => {
+  const products = await Product.find();
+
+  if (!products) {
+    res.status(500);
+    throw new Error("couldn't get products");
+  }
+
+  res.status(200).json(products);
+});
+
 module.exports = {
   addProduct,
+  getAllProducts,
 };
