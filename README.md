@@ -14,7 +14,6 @@ This is a restAPI for e-commerce website. It has all the feature of registering 
 Install ekart with npm install
 
 ```bash
-  cd ekart
   npm install
 ```
     
