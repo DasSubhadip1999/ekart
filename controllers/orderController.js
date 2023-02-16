@@ -37,7 +37,12 @@ const placeOrder = asyncHandler(async (req, res) => {
 //@access -> Private
 //@method -> GET
 const getOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find({ user: req.user.id });
+  const orders = await Order.find({ user: req.user.id })
+    .populate("paymentID")
+    .populate({
+      path: "paymentID",
+      populate: { path: "products", populate: "product" },
+    });
 
   if (!orders) {
     res.status(500);
