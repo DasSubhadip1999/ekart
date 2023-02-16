@@ -100,6 +100,12 @@ const deleteSingleCartProduct = asyncHandler(async (req, res) => {
     throw new Error("Something went wrong while deleting cart item");
   }
 
+  const newCart = await Cart.findById(carts._id);
+
+  if (newCart.products.length === 0) {
+    await Cart.remove(carts._id);
+  }
+
   res.status(200).json({ message: "Cart item deleted successfully" });
 });
 

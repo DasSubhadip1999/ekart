@@ -2,7 +2,7 @@ const asyncHandler = require("express-async-handler");
 const Cart = require("../models/cartModel");
 const PaymentModel = require("../models/paymentModel");
 
-//@route -> /checkout/payement/:cartID
+//@route -> /checkout/payement
 //@access ->  private
 //@methode -> POST
 const payment = asyncHandler(async (req, res) => {
