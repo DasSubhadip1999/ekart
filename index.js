@@ -14,6 +14,7 @@ app.use("/uploads", express.static("uploads"));
 app.use("/users", require("./routes/userRouter"));
 app.use("/products", require("./routes/productRouter"));
 app.use("/checkout", require("./routes/paymentRouter"));
+app.use("/orders", require("./routes/orderRouter"));
 app.use(errorHandler);
 
 app.get("/", (req, res) => {
