@@ -36,7 +36,21 @@ const placeOrder = asyncHandler(async (req, res) => {
 //@route -> /orders/get
 //@access -> Private
 //@method -> GET
-const getOrders = asyncHandler(async (req, res) => {});
+const getOrders = asyncHandler(async (req, res) => {
+  const orders = await Order.find({ user: req.user.id });
+
+  if (!orders) {
+    res.status(500);
+    throw new Error("Something went wrong in getting orders");
+  }
+
+  if (orders.length === 0) {
+    res.status(200);
+    res.json({ message: "No orders available" });
+  }
+
+  res.status(200).json(orders);
+});
 
 module.exports = {
   placeOrder,
