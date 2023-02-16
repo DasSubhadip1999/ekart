@@ -48,9 +48,9 @@ const getAllProducts = asynchandler(async (req, res) => {
 const getSingleProduct = asynchandler(async (req, res) => {
   const { productID } = req.params;
 
-  const product = await Product.findOne({ _id: productID }).populate(
-    "sellerID"
-  );
+  const product = await Product.findOne({ _id: productID })
+    .populate("sellerID")
+    .select("-password");
 
   if (!product) {
     res.status(404);
