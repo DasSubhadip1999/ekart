@@ -33,7 +33,9 @@ const addProduct = asynchandler(async (req, res) => {
 });
 
 const getAllProducts = asynchandler(async (req, res) => {
-  const products = await Product.find().populate("sellerID");
+  const products = await Product.find()
+    .populate("sellerID")
+    .select("-password");
 
   if (!products) {
     res.status(500);
