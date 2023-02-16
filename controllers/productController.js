@@ -7,6 +7,11 @@ const addProduct = asynchandler(async (req, res) => {
 
   const { name, price } = req.body;
 
+  if (!name || !price || !req.files) {
+    res.status(400);
+    throw new Error("Please enter name, email and images");
+  }
+
   let images;
   if (req.files) {
     images = req.files.map((image) => `${process.env.BASE_URL}/${image.path}`);
