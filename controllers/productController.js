@@ -33,9 +33,7 @@ const addProduct = asynchandler(async (req, res) => {
 });
 
 const getAllProducts = asynchandler(async (req, res) => {
-  const products = await Product.find()
-    .populate("sellerID")
-    .select("-password");
+  const products = await Product.find().populate("sellerID", "-password");
 
   if (!products) {
     res.status(500);
@@ -48,9 +46,10 @@ const getAllProducts = asynchandler(async (req, res) => {
 const getSingleProduct = asynchandler(async (req, res) => {
   const { productID } = req.params;
 
-  const product = await Product.findOne({ _id: productID })
-    .populate("sellerID")
-    .select("-password");
+  const product = await Product.findOne({ _id: productID }).populate(
+    "sellerID",
+    "-password"
+  );
 
   if (!product) {
     res.status(404);
