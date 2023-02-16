@@ -22,7 +22,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  if (process.env.NODE_ENV !== "production") {
-    console.log(`Server started on port ${PORT}`.yellow.underline);
-  }
+  console.log(`Server started on port ${PORT}`.yellow.underline);
 });
