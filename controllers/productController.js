@@ -28,7 +28,7 @@ const addProduct = asynchandler(async (req, res) => {
 });
 
 const getAllProducts = asynchandler(async (req, res) => {
-  const products = await Product.find();
+  const products = await Product.find().populate("sellerID");
 
   if (!products) {
     res.status(500);
@@ -41,7 +41,9 @@ const getAllProducts = asynchandler(async (req, res) => {
 const getSingleProduct = asynchandler(async (req, res) => {
   const { productID } = req.params;
 
-  const product = await Product.findOne({ _id: productID });
+  const product = await Product.findOne({ _id: productID }).populate(
+    "sellerID"
+  );
 
   if (!product) {
     res.status(404);

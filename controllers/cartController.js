@@ -52,7 +52,9 @@ const addToCart = asyncHandler(async (req, res) => {
 //@access ->  private
 //@methode -> GET
 const getCartProducts = asyncHandler(async (req, res) => {
-  const carts = await Cart.find({ user: req.user.id });
+  const carts = await Cart.find({ user: req.user.id })
+    .populate("user")
+    .populate({ path: "products", populate: "product" });
 
   if (!carts) {
     res.status(500);
