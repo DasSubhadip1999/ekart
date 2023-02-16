@@ -1,13 +1,10 @@
-
 # E-commerce restAPI with NodeJS
 
 This is a restAPI for e-commerce website. It has all the feature of registering user, login user, adding product to database and ordering it step by step.
 
-
 ## Tech Stack
 
 **Server** : NodeJs, ExpressJs, MongoDB, Mongoose
-
 
 ## Installation
 
@@ -16,7 +13,7 @@ Install ekart with npm install
 ```bash
   npm install
 ```
-    
+
 ## API Reference
 
 #### Register user
@@ -25,10 +22,10 @@ Install ekart with npm install
   POST /users/register
 ```
 
-| Form | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `name` | `string` | **Required**. |
-| `email` | `string` | **Required**. |
+| Form       | Type     | Description                    |
+| :--------- | :------- | :----------------------------- |
+| `name`     | `string` | **Required**.                  |
+| `email`    | `string` | **Required**.                  |
 | `password` | `string` | **Required**. (min length six) |
 
 #### Login user
@@ -37,11 +34,10 @@ Install ekart with npm install
   POST /users/login
 ```
 
-| Form | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `email`      | `string` | **Required**|
+| Form       | Type     | Description                    |
+| :--------- | :------- | :----------------------------- |
+| `email`    | `string` | **Required**                   |
 | `password` | `string` | **Required**. (min length six) |
-
 
 #### Add products
 
@@ -49,16 +45,15 @@ Install ekart with npm install
   POST /products/add-products
 ```
 
-| Form | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `name`      | `string` | **Required**|
-| `price` | `string` | **Required**|
-| `images`      | `file` | **Required**|
+| Form     | Type     | Description  |
+| :------- | :------- | :----------- |
+| `name`   | `string` | **Required** |
+| `price`  | `string` | **Required** |
+| `images` | `file`   | **Required** |
 
-| Authorization | Type     | Description  |
-| :-------- | :------- | :----------------|
-| `Headers`   | `Bearer Token` | **Only admin**|
-
+| Authorization | Type           | Description    |
+| :------------ | :------------- | :------------- |
+| `Headers`     | `Bearer Token` | **Only admin** |
 
 #### Get all products
 
@@ -72,10 +67,9 @@ Install ekart with npm install
   GET /products/get/:productID
 ```
 
-| Params | Type     | Description  |
-| :-------- | :------- | :----------------|
-| `:productID`   | `string` | **Required**|
-
+| Params       | Type     | Description  |
+| :----------- | :------- | :----------- |
+| `:productID` | `string` | **Required** |
 
 #### Add to cart product
 
@@ -83,14 +77,13 @@ Install ekart with npm install
   POST /products/get/:productID/add-to-cart
 ```
 
-| Params | Type     | Description  |
-| :-------- | :------- | :----------------|
-| `:productID`   | `string` | **Required**|
+| Params       | Type     | Description  |
+| :----------- | :------- | :----------- |
+| `:productID` | `string` | **Required** |
 
-| Authorization | Type     | Description  |
-| :-------- | :------- | :----------------|
-| `Headers`   | `Bearer Token` | **Required**|
-
+| Authorization | Type           | Description  |
+| :------------ | :------------- | :----------- |
+| `Headers`     | `Bearer Token` | **Required** |
 
 #### Remove a product from cart
 
@@ -98,25 +91,23 @@ Install ekart with npm install
   DELETE  /products/get/:productID/delete-cart-item
 ```
 
-| Params | Type     | Description  |
-| :-------- | :------- | :----------------|
-| `:productID`   | `string` | **Required**|
+| Params       | Type     | Description  |
+| :----------- | :------- | :----------- |
+| `:productID` | `string` | **Required** |
 
-| Authorization | Type     | Description  |
-| :-------- | :------- | :----------------|
-| `Headers`   | `Bearer Token` | **Required**|
-
+| Authorization | Type           | Description  |
+| :------------ | :------------- | :----------- |
+| `Headers`     | `Bearer Token` | **Required** |
 
 #### Get cart products
 
 ```http
-  GET /products/get/cart-products
+  GET /products/cart-products
 ```
 
-| Authorization | Type     | Description  |
-| :-------- | :------- | :----------------|
-| `Headers`   | `Bearer Token` | **Required**|
-
+| Authorization | Type           | Description  |
+| :------------ | :------------- | :----------- |
+| `Headers`     | `Bearer Token` | **Required** |
 
 #### Make payment for cart
 
@@ -124,14 +115,13 @@ Install ekart with npm install
   POST /checkout/payment
 ```
 
-| Authorization | Type     | Description  |
-| :-------- | :------- | :----------------|
-| `Headers`   | `Bearer Token` | **Required**|
+| Authorization | Type           | Description  |
+| :------------ | :------------- | :----------- |
+| `Headers`     | `Bearer Token` | **Required** |
 
-| Form | Type     | Description  |
-| :-------- | :------- | :----------------|
-| `paymentMode`   | `['online', 'cod']` | **Required**|
-
+| Form          | Type                | Description  |
+| :------------ | :------------------ | :----------- |
+| `paymentMode` | `['online', 'cod']` | **Required** |
 
 #### Place an order
 
@@ -139,14 +129,13 @@ Install ekart with npm install
   POST /orders/place-order/:paymentID
 ```
 
-| Authorization | Type     | Description  |
-| :-------- | :------- | :----------------|
-| `Headers`   | `Bearer Token` | **Required**|
+| Authorization | Type           | Description  |
+| :------------ | :------------- | :----------- |
+| `Headers`     | `Bearer Token` | **Required** |
 
-| Params | Type     | Description  |
-| :-------- | :------- | :----------------|
-| `paymentID`   | `string` | **Required**|
-
+| Params      | Type     | Description  |
+| :---------- | :------- | :----------- |
+| `paymentID` | `string` | **Required** |
 
 #### Get all orders
 
@@ -154,14 +143,9 @@ Install ekart with npm install
   GET /orders/get
 ```
 
-| Authorization | Type     | Description  |
-| :-------- | :------- | :----------------|
-| `Headers`   | `Bearer Token` | **Required**|
-
-
-
-
-
+| Authorization | Type           | Description  |
+| :------------ | :------------- | :----------- |
+| `Headers`     | `Bearer Token` | **Required** |
 
 ## Environment Variables
 
@@ -178,5 +162,3 @@ To run this project, you will need to add the following environment variables to
 `PORT`
 
 `BASE_URL`
-
-

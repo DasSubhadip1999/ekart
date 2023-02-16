@@ -48,12 +48,12 @@ const addToCart = asyncHandler(async (req, res) => {
   res.status(201).json(cart);
 });
 
-//@route -> /products/get/cart-products
+//@route -> /products/cart-products
 //@access ->  private
 //@methode -> GET
 const getCartProducts = asyncHandler(async (req, res) => {
   const carts = await Cart.find({ user: req.user.id })
-    .populate("user")
+    .populate("user", "-password")
     .populate({ path: "products", populate: "product" });
 
   if (!carts) {
