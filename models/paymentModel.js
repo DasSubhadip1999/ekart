@@ -8,8 +8,13 @@ const paymentSchema = mongoose.Schema({
   },
   products: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Product",
+      product: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
+      },
+      expectedDeliveryDate: {
+        type: Date,
+      },
     },
   ],
   paymentAmount: {
@@ -25,3 +30,5 @@ const paymentSchema = mongoose.Schema({
     enum: ["pending", "fullfilled"],
   },
 });
+
+module.exports = mongoose.model("Payment", paymentSchema);

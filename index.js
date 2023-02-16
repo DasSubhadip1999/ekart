@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/uploads", express.static("uploads"));
 app.use("/users", require("./routes/userRouter"));
 app.use("/products", require("./routes/productRouter"));
+app.use("/checkout", require("./routes/paymentRouter"));
 app.use(errorHandler);
 
 app.get("/", (req, res) => {
